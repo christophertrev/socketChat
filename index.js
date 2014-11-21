@@ -6,6 +6,8 @@ app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
+app.set('port', (process.env.PORT || 5000))
+
 io.on('connection', function(socket){
 
   console.log('a user connected');
@@ -23,6 +25,6 @@ io.on('connection', function(socket){
 
 });
 
-http.listen(3000, function(){
+http.listen(app.get('port'), function(){
   console.log('listening on *:3000');
 });
