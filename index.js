@@ -10,7 +10,6 @@ app.set('port', (process.env.PORT || 5000))
 
 io.set('transports','xhr-polling');
 
-
 io.on('connection', function(socket){
 
   console.log('a user connected');
