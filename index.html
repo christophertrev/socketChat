@@ -11,6 +11,7 @@
       #messages { list-style-type: none; margin: 0; padding: 0; }
       #messages li { padding: 5px 10px; }
       #messages li:nth-child(odd) { background: #eee; }
+      .username {font-weight: bold;}
     </style>
   </head>
   <script src="/socket.io/socket.io.js"></script>
@@ -23,7 +24,6 @@
   <script>
     
     var username = window.prompt("Please enter Name","Harry Potter")
-    console.log('username: ',username)
     var socket = io({query:'user='+username});
     $('form').submit(function(e){
       // object {username: 'name', text:'ttest testt'}
@@ -38,7 +38,11 @@
     });
     socket.on('chat message', function(msg){
       console.log(msg)
-      $('#messages').append($('<li>').text(msg.text));
+      var $li = $('<li>').addClass('message');
+      var $username = $('<span>').addClass('username').text(msg.username+': ');
+      $li.html($username).append(msg.text);
+      // debugger;
+      $('#messages').append($li);
     });
   </script>
   </body>

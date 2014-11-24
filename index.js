@@ -13,7 +13,10 @@ io.set('transports','xhr-polling');
 io.on('connection', function(socket){
   var username = socket.handshake.query.user;
   console.log('User ' + username + ' connected!' );
-  socket.broadcast.emit('chat message',{text : 'User '+ username+' Connected'});
+  socket.broadcast.emit('chat message',{
+    text : 'User '+ username+' Connected',
+    username: 'The Admins'
+  });
 
   socket.on('chat message',function(msg){
 
