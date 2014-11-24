@@ -26,6 +26,8 @@
     if(! localStorage.getItem('username')){
        var username = window.prompt("Please enter Name","Harry Potter")
       localStorage.setItem('username',username);
+    }else {
+      username = localStorage.getItem('username');
     }
     var socket = io({query:'user='+username});
     $('form').submit(function(e){
