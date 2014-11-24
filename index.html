@@ -23,7 +23,10 @@
     </form>
   <script>
     
-    var username = window.prompt("Please enter Name","Harry Potter")
+    if(! localStorage.getItem('username')){
+       var username = window.prompt("Please enter Name","Harry Potter")
+      localStorage.setItem('username',username);
+    }
     var socket = io({query:'user='+username});
     $('form').submit(function(e){
       // object {username: 'name', text:'ttest testt'}
