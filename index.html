@@ -21,16 +21,23 @@
       <input id="m" autocomplete="off" /><button>Send</button>
     </form>
   <script>
+    
+    var username = window.prompt("Please enter Name","Harry Potter")
+    console.log('username: ',username)
     var socket = io();
     $('form').submit(function(e){
+      // object {username: 'name', message:'ttest testt'}
       e.preventDefault();
-
-      socket.emit('chat message', $('#m').val());
+      var message = {
+        username: username,
+        text: $('#m').val()
+      }
+      socket.emit('chat message', message);
       $('#m').val('');
       return false;
     });
     socket.on('chat message', function(msg){
-      $('#messages').append($('<li>').text(msg));
+      $('#messages').append($('<li>').text(msg.text));
     });
   </script>
   </body>

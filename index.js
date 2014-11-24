@@ -11,12 +11,11 @@ app.set('port', (process.env.PORT || 5000))
 io.set('transports','xhr-polling');
 
 io.on('connection', function(socket){
+  console.log('a user connected at ' );
+  socket.broadcast.emit('chat message',{text : 'User Connected'});
 
-  console.log('a user connected');
-  
-  io.emit('Hello Welcome to Chatbox!`');
-  
   socket.on('chat message',function(msg){
+
     console.log('mesage: ', msg);
     io.emit('chat message', msg);
   });
