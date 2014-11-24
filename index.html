@@ -8,15 +8,21 @@
       form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
       form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
       form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages { list-style-type: none; margin: 0; padding: 0;}
       #messages li { padding: 5px 10px; }
       #messages li:nth-child(odd) { background: #eee; }
       .username {font-weight: bold;}
+      .dashboard {
+        margin:0; 
+        padding:5px 10px; 
+        background:rgb(130, 224, 255);
+      }
     </style>
   </head>
   <script src="/socket.io/socket.io.js"></script>
   <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
   <body>
+    <div class="dashboard">Hello, </div>
     <ul id="messages"></ul>
     <form action="">
       <input id="m" autocomplete="off" /><button>Send</button>
@@ -29,6 +35,7 @@
     }else {
       username = localStorage.getItem('username');
     }
+    $('.dashboard').append($('<span>').addClass('username').text(username))
     var socket = io({query:'user='+username});
     $('form').submit(function(e){
       // object {username: 'name', text:'ttest testt'}
