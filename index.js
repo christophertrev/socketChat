@@ -25,7 +25,12 @@ io.on('connection', function(socket){
   });
 
   socket.on('disconnect', function(){
-    console.log('user disconnected');
+    var username = socket.handshake.query.user;
+    console.log('User '+ username +' disconnected!');
+    socket.broadcast.emit('chat message',{
+      text : 'User '+ username+' disconnected',
+      username: 'The Admins'
+    });
   });
 
 });
