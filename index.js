@@ -11,8 +11,9 @@ app.set('port', (process.env.PORT || 5000))
 io.set('transports','xhr-polling');
 
 io.on('connection', function(socket){
-  console.log('a user connected at ' );
-  socket.broadcast.emit('chat message',{text : 'User Connected'});
+  var username = socket.handshake.query.user;
+  console.log('User ' + username + ' connected!' );
+  socket.broadcast.emit('chat message',{text : 'User '+ username+' Connected'});
 
   socket.on('chat message',function(msg){
 
